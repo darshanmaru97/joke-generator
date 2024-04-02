@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Joke Generator</title>
+    <!--Google Font-->
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;600&display=swap" rel="stylesheet">
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+    <!-- <script src="https://cdn.jsdelivr.net/npm/alpinejs@2.8.2/dist/alpine.min.js" defer></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.7/dist/cdn.min.js" defer></script>
+</head>
+<body x-data="{ joke: '' }">
+    <div class="wrapper">
+        <span>&#128514;</span>
+
+          <p id="joke" x-text="joke"></p>
+
+        <button @click="fetchJoke()">Get Random Joke</button>
+    </div>
+
+    <!-- Script -->
+        <script>
+
+     let fetchJoke = () => {
+        joke.classList.remove("fade");
+     fetch("https://v2.jokeapi.dev/joke/Any?blacklistFlags=nsfw,religious,political,racist,sexist,explicit&type=single")
+     .then(data => data.json())
+     .then(item =>{
+        joke.textContent = `${item.joke}`;
+        joke.classList.add("fade");
+     });
+}
+    </script>
+</body>
+</html>
